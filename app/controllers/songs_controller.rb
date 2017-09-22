@@ -18,7 +18,7 @@ class SongsController < ProtectedController
     @song = current_user.songs.build(song_params)
 
     if @song.save
-      render json: @song, status: :created, location: @song
+      render json: @song, status: :created
     else
       render json: @song.errors, status: :unprocessable_entity
     end
