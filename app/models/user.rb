@@ -4,4 +4,5 @@ class User < ApplicationRecord
   include Authentication
   has_many :examples
   has_many :songs
+  has_many :composers, through: :songs
 end

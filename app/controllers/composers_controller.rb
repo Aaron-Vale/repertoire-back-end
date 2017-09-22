@@ -1,9 +1,9 @@
-class ComposersController < ApplicationController
+class ComposersController < ProtectedController
   before_action :set_composer, only: [:show, :update, :destroy]
 
   # GET /composers
   def index
-    @composers = Composer.all
+    @composers = current_user.composers.all
 
     render json: @composers
   end
@@ -15,7 +15,7 @@ class ComposersController < ApplicationController
 
   # POST /composers
   def create
-    @composer = Composer.new(composer_params)
+    @composer = current_user.composers.build(composer_params)
 
     if @composer.save
       render json: @composer, status: :created
@@ -41,7 +41,7 @@ class ComposersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_composer
-      @composer = Composer.find(params[:id])
+      @composer = current_user.composers.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

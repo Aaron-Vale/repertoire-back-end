@@ -3,6 +3,7 @@ curl --include --request POST "http://localhost:4741/songs/" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "song": {
-      "name": "'"${NAME}"'"
+      "name": "'"${NAME}"'",
+      "composer_id": "'"${COMPOSER_ID}"'"
     }
   }'

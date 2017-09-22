@@ -3,6 +3,7 @@ curl --include --request PATCH "http://localhost:4741/songs/${ID}" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "song": {
-      "name": "'"${NAME}"'"
+      "name": "'"${NAME}"'",
+      "composer_id": "'"${COMPOSER_ID}"'"
     }
   }'
