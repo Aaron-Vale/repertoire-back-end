@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show]
   resources :songs, except: %i[new edit]
   resources :composers, except: %i[new edit]
+  resources :instruments, except: %i[new edit]
 end
