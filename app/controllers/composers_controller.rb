@@ -46,6 +46,6 @@ class ComposersController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def composer_params
-      params.require(:composer).permit(:name)
+      params.require(:composer, :name)
     end
 end
