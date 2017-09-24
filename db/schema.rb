@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923120911) do
+ActiveRecord::Schema.define(version: 20170924024708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 20170923120911) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "composers", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "examples", force: :cascade do |t|
     t.text "text", null: false
     t.bigint "user_id", null: false
@@ -40,21 +34,13 @@ ActiveRecord::Schema.define(version: 20170923120911) do
     t.index ["user_id"], name: "index_examples_on_user_id"
   end
 
-  create_table "instruments", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "songs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "composer_id"
-    t.bigint "instrument_id"
-    t.index ["composer_id"], name: "index_songs_on_composer_id"
-    t.index ["instrument_id"], name: "index_songs_on_instrument_id"
+    t.string "composer"
+    t.string "instrument"
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -69,7 +55,5 @@ ActiveRecord::Schema.define(version: 20170923120911) do
   end
 
   add_foreign_key "examples", "users"
-  add_foreign_key "songs", "composers"
-  add_foreign_key "songs", "instruments"
   add_foreign_key "songs", "users"
 end

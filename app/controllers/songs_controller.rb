@@ -15,8 +15,8 @@ class SongsController < ProtectedController
 
   # POST /songs
   def create
-    @song = current_user.songs.build(song_params)
-
+    @song = Song.new(song_params)
+    puts @song
     if @song.save
       render json: @song, status: :created
     else
@@ -46,6 +46,6 @@ class SongsController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song, :name, :user_id, :composer_id, :instrument_id)
+      params.require(:song).permit(:name, :user_id, :composer, :instrument)
     end
 end
