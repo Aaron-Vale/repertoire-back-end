@@ -3,7 +3,11 @@ class SongsController < ProtectedController
 
   # GET /songs
   def index
-    @songs = current_user.songs.all
+    @url = request.original_url
+    uri = URI.parse(@url)
+    params = CGI.parse(uri.query)
+    order = params['order'][0]
+    @songs = current_user.songs.all.order("#{order} ASC")
 
     render json: @songs
   end
@@ -45,6 +49,6 @@ class SongsController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:name, :user_id, :composer, :instrument)
+      params.require(:song).permit(:name, :user_id, :composer, :instrument, :order)
     end
 end
