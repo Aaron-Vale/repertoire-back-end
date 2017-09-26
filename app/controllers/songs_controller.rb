@@ -16,7 +16,6 @@ class SongsController < ProtectedController
   # POST /songs
   def create
     @song = Song.new(song_params)
-    puts @song
     if @song.save
       render json: @song, status: :created
     else
